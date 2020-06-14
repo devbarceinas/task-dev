@@ -16,6 +16,15 @@ const createNewElement = (element, addClass, inputText, icon) => {
   return nElement;
 }
 
+const removeTask = (event) => {
+  const element = event.target.parentElement.classList.contains('float-right');
+  if (element) {
+    if (confirm('Estas seguro de eliminar!')) {
+      event.target.parentElement.parentElement.remove()
+    }
+  }
+}
+
 const addTask = (event) => {
   event.preventDefault();
   if (inputTask.value !== '') {
@@ -23,6 +32,7 @@ const addTask = (event) => {
     const a = createNewElement('a', 'float-right', '', '<i class="fa fa-trash"></i>');
     li.appendChild(a);
     listGroup.appendChild(li);
+    console.log(listGroup);
     inputTask.value = '';
   } else {
     alert('Campo vacio!');
@@ -31,6 +41,7 @@ const addTask = (event) => {
 
 const loadAddEventListeners = () => { 
   formSubmit.addEventListener('click', addTask);
+  listGroup.addEventListener('click', removeTask);
 }
 
 loadAddEventListeners();
